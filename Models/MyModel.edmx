@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MedicalAppointmentManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="APPOINTMENT">
+          <Key>
+            <PropertyRef Name="date" />
+          </Key>
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="startSlotTime" Type="datetime" Nullable="false" />
+          <Property Name="endSlotTime" Type="datetime" Nullable="false" />
+          <Property Name="PATIENT_patientAMKA" Type="int" Nullable="false" />
+          <Property Name="DOCTOR_doctorAMKA" Type="int" Nullable="false" />
+          <Property Name="isAvailable" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DOCTOR">
+          <Key>
+            <PropertyRef Name="doctorAMKA" />
+          </Key>
+          <Property Name="doctorAMKA" Type="int" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="speciality" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="ADMIN_userid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PATIENT">
+          <Key>
+            <PropertyRef Name="patientAMKA" />
+          </Key>
+          <Property Name="patientAMKA" Type="int" Nullable="false" />
+          <Property Name="userid" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_APPOINTMENT_DOCTOR">
+          <End Role="DOCTOR" Type="Self.DOCTOR" Multiplicity="1" />
+          <End Role="APPOINTMENT" Type="Self.APPOINTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOCTOR">
+              <PropertyRef Name="doctorAMKA" />
+            </Principal>
+            <Dependent Role="APPOINTMENT">
+              <PropertyRef Name="DOCTOR_doctorAMKA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APPOINTMENT_PATIENT">
+          <End Role="PATIENT" Type="Self.PATIENT" Multiplicity="1" />
+          <End Role="APPOINTMENT" Type="Self.APPOINTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PATIENT">
+              <PropertyRef Name="patientAMKA" />
+            </Principal>
+            <Dependent Role="APPOINTMENT">
+              <PropertyRef Name="PATIENT_patientAMKA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DOCTOR_ADMIN">
+          <End Role="ADMIN" Type="Self.ADMIN" Multiplicity="1" />
+          <End Role="DOCTOR" Type="Self.DOCTOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADMIN">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="DOCTOR">
+              <PropertyRef Name="ADMIN_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MedicalAppointmentManagementModelStoreContainer">
+          <EntitySet Name="ADMIN" EntityType="Self.ADMIN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APPOINTMENT" EntityType="Self.APPOINTMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOCTOR" EntityType="Self.DOCTOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PATIENT" EntityType="Self.PATIENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_APPOINTMENT_DOCTOR" Association="Self.FK_APPOINTMENT_DOCTOR">
+            <End Role="DOCTOR" EntitySet="DOCTOR" />
+            <End Role="APPOINTMENT" EntitySet="APPOINTMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APPOINTMENT_PATIENT" Association="Self.FK_APPOINTMENT_PATIENT">
+            <End Role="PATIENT" EntitySet="PATIENT" />
+            <End Role="APPOINTMENT" EntitySet="APPOINTMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DOCTOR_ADMIN" Association="Self.FK_DOCTOR_ADMIN">
+            <End Role="ADMIN" EntitySet="ADMIN" />
+            <End Role="DOCTOR" EntitySet="DOCTOR" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MedicalAppointmentManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DOCTOR" Relationship="Self.FK_DOCTOR_ADMIN" FromRole="ADMIN" ToRole="DOCTOR" />
+        </EntityType>
+        <EntityType Name="APPOINTMENT">
+          <Key>
+            <PropertyRef Name="date" />
+          </Key>
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="startSlotTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="endSlotTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PATIENT_patientAMKA" Type="Int32" Nullable="false" />
+          <Property Name="DOCTOR_doctorAMKA" Type="Int32" Nullable="false" />
+          <Property Name="isAvailable" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DOCTOR" Relationship="Self.FK_APPOINTMENT_DOCTOR" FromRole="APPOINTMENT" ToRole="DOCTOR" />
+          <NavigationProperty Name="PATIENT" Relationship="Self.FK_APPOINTMENT_PATIENT" FromRole="APPOINTMENT" ToRole="PATIENT" />
+        </EntityType>
+        <EntityType Name="DOCTOR">
+          <Key>
+            <PropertyRef Name="doctorAMKA" />
+          </Key>
+          <Property Name="doctorAMKA" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="speciality" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ADMIN_userid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ADMIN" Relationship="Self.FK_DOCTOR_ADMIN" FromRole="DOCTOR" ToRole="ADMIN" />
+          <NavigationProperty Name="APPOINTMENT" Relationship="Self.FK_APPOINTMENT_DOCTOR" FromRole="DOCTOR" ToRole="APPOINTMENT" />
+        </EntityType>
+        <EntityType Name="PATIENT">
+          <Key>
+            <PropertyRef Name="patientAMKA" />
+          </Key>
+          <Property Name="patientAMKA" Type="Int32" Nullable="false" />
+          <Property Name="userid" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="APPOINTMENT" Relationship="Self.FK_APPOINTMENT_PATIENT" FromRole="PATIENT" ToRole="APPOINTMENT" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_DOCTOR_ADMIN">
+          <End Role="ADMIN" Type="Self.ADMIN" Multiplicity="1" />
+          <End Role="DOCTOR" Type="Self.DOCTOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADMIN">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="DOCTOR">
+              <PropertyRef Name="ADMIN_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APPOINTMENT_DOCTOR">
+          <End Role="DOCTOR" Type="Self.DOCTOR" Multiplicity="1" />
+          <End Role="APPOINTMENT" Type="Self.APPOINTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOCTOR">
+              <PropertyRef Name="doctorAMKA" />
+            </Principal>
+            <Dependent Role="APPOINTMENT">
+              <PropertyRef Name="DOCTOR_doctorAMKA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APPOINTMENT_PATIENT">
+          <End Role="PATIENT" Type="Self.PATIENT" Multiplicity="1" />
+          <End Role="APPOINTMENT" Type="Self.APPOINTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PATIENT">
+              <PropertyRef Name="patientAMKA" />
+            </Principal>
+            <Dependent Role="APPOINTMENT">
+              <PropertyRef Name="PATIENT_patientAMKA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Appointement_MVCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ADMIN" EntityType="Self.ADMIN" />
+          <EntitySet Name="APPOINTMENT" EntityType="Self.APPOINTMENT" />
+          <EntitySet Name="DOCTOR" EntityType="Self.DOCTOR" />
+          <EntitySet Name="PATIENT" EntityType="Self.PATIENT" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_DOCTOR_ADMIN" Association="Self.FK_DOCTOR_ADMIN">
+            <End Role="ADMIN" EntitySet="ADMIN" />
+            <End Role="DOCTOR" EntitySet="DOCTOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APPOINTMENT_DOCTOR" Association="Self.FK_APPOINTMENT_DOCTOR">
+            <End Role="DOCTOR" EntitySet="DOCTOR" />
+            <End Role="APPOINTMENT" EntitySet="APPOINTMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APPOINTMENT_PATIENT" Association="Self.FK_APPOINTMENT_PATIENT">
+            <End Role="PATIENT" EntitySet="PATIENT" />
+            <End Role="APPOINTMENT" EntitySet="APPOINTMENT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MedicalAppointmentManagementModelStoreContainer" CdmEntityContainer="Appointement_MVCEntities">
+          <EntitySetMapping Name="ADMIN">
+            <EntityTypeMapping TypeName="MedicalAppointmentManagementModel.ADMIN">
+              <MappingFragment StoreEntitySet="ADMIN">
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="username" ColumnName="username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APPOINTMENT">
+            <EntityTypeMapping TypeName="MedicalAppointmentManagementModel.APPOINTMENT">
+              <MappingFragment StoreEntitySet="APPOINTMENT">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="startSlotTime" ColumnName="startSlotTime" />
+                <ScalarProperty Name="endSlotTime" ColumnName="endSlotTime" />
+                <ScalarProperty Name="PATIENT_patientAMKA" ColumnName="PATIENT_patientAMKA" />
+                <ScalarProperty Name="DOCTOR_doctorAMKA" ColumnName="DOCTOR_doctorAMKA" />
+                <ScalarProperty Name="isAvailable" ColumnName="isAvailable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCTOR">
+            <EntityTypeMapping TypeName="MedicalAppointmentManagementModel.DOCTOR">
+              <MappingFragment StoreEntitySet="DOCTOR">
+                <ScalarProperty Name="doctorAMKA" ColumnName="doctorAMKA" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="speciality" ColumnName="speciality" />
+                <ScalarProperty Name="ADMIN_userid" ColumnName="ADMIN_userid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PATIENT">
+            <EntityTypeMapping TypeName="MedicalAppointmentManagementModel.PATIENT">
+              <MappingFragment StoreEntitySet="PATIENT">
+                <ScalarProperty Name="patientAMKA" ColumnName="patientAMKA" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MedicalAppointmentManagementModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
