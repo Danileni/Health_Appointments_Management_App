@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f122337039764952955871a3e6b5d0d5" Name="Diagram1">
-        <EntityTypeShape EntityType="MedicalAppointmentManagementModel.ADMIN" Width="1.5" PointX="3.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicalAppointmentManagementModel.APPOINTMENT" Width="1.5" PointX="4.25" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicalAppointmentManagementModel.DOCTOR" Width="1.5" PointX="6.625" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicalAppointmentManagementModel.PATIENT" Width="1.5" PointX="0.875" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicalAppointmentManagementModel.sysdiagrams" Width="1.5" PointX="7.125" PointY="4.875" IsExpanded="true" />
-        <AssociationConnector Association="MedicalAppointmentManagementModel.FK_DOCTOR_ADMIN" ManuallyRouted="false" />
-        <AssociationConnector Association="MedicalAppointmentManagementModel.FK_APPOINTMENT_DOCTOR" ManuallyRouted="false" />
-        <AssociationConnector Association="MedicalAppointmentManagementModel.FK_APPOINTMENT_PATIENT" ManuallyRouted="false" />
+      <Diagram DiagramId="fdd18c27eab9463aaacaa4c4dbb54ca9" Name="Diagram1">
+        <EntityTypeShape EntityType="Appointement_MVC_Model.ADMIN" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Appointement_MVC_Model.APPOINTMENT" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Appointement_MVC_Model.DOCTOR" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Appointement_MVC_Model.PATIENT" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Appointement_MVC_Model.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="Appointement_MVC_Model.FK_DOCTOR_ADMIN" ManuallyRouted="false" />
+        <AssociationConnector Association="Appointement_MVC_Model.FK_APPOINTMENT_DOCTOR" ManuallyRouted="false" />
+        <AssociationConnector Association="Appointement_MVC_Model.FK_APPOINTMENT_PATIENT" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

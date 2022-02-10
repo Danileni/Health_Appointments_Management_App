@@ -1,0 +1,33 @@
+﻿@model HealthAppointmentsManagement.Models.PATIENT
+
+@{
+    ViewBag.Title = "Schedule";
+}
+
+<div class="row">
+    <div class="col-lg-6 mx-auto">
+        <h1 class="display-5">Appointments Management</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6 mx-auto">
+        <div class="border border-dark bg-dark rounded p-2">
+            <p class="lead">Welcome @Session["UserName"].ToString()! How are you today, do you want to book a doctor appointment?</p>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="row">
+    <div class="col-lg-6 mx-auto">
+        <div class="border border-dark bg-dark rounded p-2">
+            <h1 class="display-6 pb-1">Appointment</h1>
+            <p class="lead">Book an appointment</p>
+            <a href="../Appointments/Create" type="button" class="btn btn-outline-primary">Create</a>
+            <p class="lead pt-2">View appointmens</p>
+            <a href="../Appointments" type="button" class="btn btn-outline-primary">View</a>
+        </div>
+    </div>
+</div>
+<br>

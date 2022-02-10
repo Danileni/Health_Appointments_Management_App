@@ -72,7 +72,11 @@ C:\Users\HPoly.DESKTOP-NR409IG\VisualStudioMVC\HealthAppointmentsManagement\bin\
 C:\Users\HPoly.DESKTOP-NR409IG\VisualStudioMVC\HealthAppointmentsManagement\bin\Newtonsoft.Json.xml
 C:\Users\HPoly.DESKTOP-NR409IG\VisualStudioMVC\HealthAppointmentsManagement\bin\Antlr3.Runtime.pdb
 C:\Users\HPoly.DESKTOP-NR409IG\VisualStudioMVC\HealthAppointmentsManagement\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\HPoly.DESKTOP-NR409IG\VisualStudioMVC\HealthAppointmentsManagement\obj\Debug\HealthAppointmentsManagement.csproj.AssemblyReference.cache
 C:\Users\HPoly.DESKTOP-NR409IG\VisualStudioMVC\HealthAppointmentsManagement\obj\Debug\HealthAppointmentsManagement.csproj.CoreCompileInputs.cache
 C:\Users\HPoly.DESKTOP-NR409IG\VisualStudioMVC\HealthAppointmentsManagement\obj\Debug\HealthAppointmentsManagement.dll
 C:\Users\HPoly.DESKTOP-NR409IG\VisualStudioMVC\HealthAppointmentsManagement\obj\Debug\HealthAppointmentsManagement.pdb
+C:\Users\HPoly.DESKTOP-NR409IG\VisualStudioMVC\HealthAppointmentsManagement\bin\EntityFramework.dll
+C:\Users\HPoly.DESKTOP-NR409IG\VisualStudioMVC\HealthAppointmentsManagement\bin\EntityFramework.SqlServer.dll
+C:\Users\HPoly.DESKTOP-NR409IG\VisualStudioMVC\HealthAppointmentsManagement\bin\EntityFramework.xml
+C:\Users\HPoly.DESKTOP-NR409IG\VisualStudioMVC\HealthAppointmentsManagement\bin\EntityFramework.SqlServer.xml
+C:\Users\HPoly.DESKTOP-NR409IG\VisualStudioMVC\HealthAppointmentsManagement\obj\Debug\HealthAppointmentsManagement.csproj.AssemblyReference.cache

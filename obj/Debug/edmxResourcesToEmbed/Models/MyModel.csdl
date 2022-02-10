@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Appointement_MVC_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ADMIN">
+    <Key>
+      <PropertyRef Name="userid" />
+    </Key>
+    <Property Name="userid" Type="Int32" Nullable="false" />
+    <Property Name="username" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="DOCTOR" Relationship="Self.FK_DOCTOR_ADMIN" FromRole="ADMIN" ToRole="DOCTOR" />
+  </EntityType>
+  <EntityType Name="APPOINTMENT">
+    <Key>
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="startSlotTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="endSlotTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PATIENT_patientAMKA" Type="Int32" Nullable="false" />
+    <Property Name="DOCTOR_doctorAMKA" Type="Int32" Nullable="false" />
+    <Property Name="isAvailable" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="DOCTOR" Relationship="Self.FK_APPOINTMENT_DOCTOR" FromRole="APPOINTMENT" ToRole="DOCTOR" />
+    <NavigationProperty Name="PATIENT" Relationship="Self.FK_APPOINTMENT_PATIENT" FromRole="APPOINTMENT" ToRole="PATIENT" />
+  </EntityType>
+  <EntityType Name="DOCTOR">
+    <Key>
+      <PropertyRef Name="doctorAMKA" />
+    </Key>
+    <Property Name="doctorAMKA" Type="Int32" Nullable="false" />
+    <Property Name="username" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="surname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="specialty" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ADMIN_userid" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ADMIN" Relationship="Self.FK_DOCTOR_ADMIN" FromRole="DOCTOR" ToRole="ADMIN" />
+    <NavigationProperty Name="APPOINTMENT" Relationship="Self.FK_APPOINTMENT_DOCTOR" FromRole="DOCTOR" ToRole="APPOINTMENT" />
+  </EntityType>
+  <EntityType Name="PATIENT">
+    <Key>
+      <PropertyRef Name="patientAMKA" />
+    </Key>
+    <Property Name="patientAMKA" Type="Int32" Nullable="false" />
+    <Property Name="userid" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="surname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="APPOINTMENT" Relationship="Self.FK_APPOINTMENT_PATIENT" FromRole="PATIENT" ToRole="APPOINTMENT" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_DOCTOR_ADMIN">
+    <End Role="ADMIN" Type="Self.ADMIN" Multiplicity="1" />
+    <End Role="DOCTOR" Type="Self.DOCTOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ADMIN">
+        <PropertyRef Name="userid" />
+      </Principal>
+      <Dependent Role="DOCTOR">
+        <PropertyRef Name="ADMIN_userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_APPOINTMENT_DOCTOR">
+    <End Role="DOCTOR" Type="Self.DOCTOR" Multiplicity="1" />
+    <End Role="APPOINTMENT" Type="Self.APPOINTMENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DOCTOR">
+        <PropertyRef Name="doctorAMKA" />
+      </Principal>
+      <Dependent Role="APPOINTMENT">
+        <PropertyRef Name="DOCTOR_doctorAMKA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_APPOINTMENT_PATIENT">
+    <End Role="PATIENT" Type="Self.PATIENT" Multiplicity="1" />
+    <End Role="APPOINTMENT" Type="Self.APPOINTMENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PATIENT">
+        <PropertyRef Name="patientAMKA" />
+      </Principal>
+      <Dependent Role="APPOINTMENT">
+        <PropertyRef Name="PATIENT_patientAMKA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Appointement_MVC_Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ADMIN" EntityType="Self.ADMIN" />
+    <EntitySet Name="APPOINTMENT" EntityType="Self.APPOINTMENT" />
+    <EntitySet Name="DOCTOR" EntityType="Self.DOCTOR" />
+    <EntitySet Name="PATIENT" EntityType="Self.PATIENT" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <AssociationSet Name="FK_DOCTOR_ADMIN" Association="Self.FK_DOCTOR_ADMIN">
+      <End Role="ADMIN" EntitySet="ADMIN" />
+      <End Role="DOCTOR" EntitySet="DOCTOR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_APPOINTMENT_DOCTOR" Association="Self.FK_APPOINTMENT_DOCTOR">
+      <End Role="DOCTOR" EntitySet="DOCTOR" />
+      <End Role="APPOINTMENT" EntitySet="APPOINTMENT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_APPOINTMENT_PATIENT" Association="Self.FK_APPOINTMENT_PATIENT">
+      <End Role="PATIENT" EntitySet="PATIENT" />
+      <End Role="APPOINTMENT" EntitySet="APPOINTMENT" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

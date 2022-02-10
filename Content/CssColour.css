@@ -1,0 +1,19 @@
+﻿#drop {
+    background-color: rgb(255, 229, 229);
+}
+
+#drop :hover {
+        background-color: #353535;
+}
+
+body {
+    background-color: rgb(255, 229, 229);
+}
+
+p {
+    text-align: justify;
+}
+
+.btn btn-default:hover {
+    background-color: yellow !important;
+}

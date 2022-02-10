@@ -4,13 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MedicalAppointmentManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Appointement_MVC_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ADMIN">
           <Key>
             <PropertyRef Name="userid" />
           </Key>
           <Property Name="userid" Type="int" Nullable="false" />
           <Property Name="username" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <EntityType Name="APPOINTMENT">
           <Key>
@@ -30,8 +31,9 @@
           <Property Name="doctorAMKA" Type="int" Nullable="false" />
           <Property Name="username" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="surname" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="speciality" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="specialty" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="ADMIN_userid" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PATIENT">
@@ -42,6 +44,7 @@
           <Property Name="userid" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="surname" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -89,7 +92,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="MedicalAppointmentManagementModelStoreContainer">
+        <EntityContainer Name="Appointement_MVC_ModelStoreContainer">
           <EntitySet Name="ADMIN" EntityType="Self.ADMIN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="APPOINTMENT" EntityType="Self.APPOINTMENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DOCTOR" EntityType="Self.DOCTOR" Schema="dbo" store:Type="Tables" />
@@ -112,13 +115,14 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="MedicalAppointmentManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Appointement_MVC_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="ADMIN">
           <Key>
             <PropertyRef Name="userid" />
           </Key>
           <Property Name="userid" Type="Int32" Nullable="false" />
           <Property Name="username" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="DOCTOR" Relationship="Self.FK_DOCTOR_ADMIN" FromRole="ADMIN" ToRole="DOCTOR" />
         </EntityType>
         <EntityType Name="APPOINTMENT">
@@ -141,8 +145,9 @@
           <Property Name="doctorAMKA" Type="Int32" Nullable="false" />
           <Property Name="username" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="surname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="speciality" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="specialty" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ADMIN_userid" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ADMIN" Relationship="Self.FK_DOCTOR_ADMIN" FromRole="DOCTOR" ToRole="ADMIN" />
           <NavigationProperty Name="APPOINTMENT" Relationship="Self.FK_APPOINTMENT_DOCTOR" FromRole="DOCTOR" ToRole="APPOINTMENT" />
@@ -155,6 +160,7 @@
           <Property Name="userid" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="surname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="APPOINTMENT" Relationship="Self.FK_APPOINTMENT_PATIENT" FromRole="PATIENT" ToRole="APPOINTMENT" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -203,7 +209,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Appointement_MVCEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Appointement_MVC_Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ADMIN" EntityType="Self.ADMIN" />
           <EntitySet Name="APPOINTMENT" EntityType="Self.APPOINTMENT" />
           <EntitySet Name="DOCTOR" EntityType="Self.DOCTOR" />
@@ -227,17 +233,18 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MedicalAppointmentManagementModelStoreContainer" CdmEntityContainer="Appointement_MVCEntities">
+        <EntityContainerMapping StorageEntityContainer="Appointement_MVC_ModelStoreContainer" CdmEntityContainer="Appointement_MVC_Entities">
           <EntitySetMapping Name="ADMIN">
-            <EntityTypeMapping TypeName="MedicalAppointmentManagementModel.ADMIN">
+            <EntityTypeMapping TypeName="Appointement_MVC_Model.ADMIN">
               <MappingFragment StoreEntitySet="ADMIN">
                 <ScalarProperty Name="userid" ColumnName="userid" />
                 <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="APPOINTMENT">
-            <EntityTypeMapping TypeName="MedicalAppointmentManagementModel.APPOINTMENT">
+            <EntityTypeMapping TypeName="Appointement_MVC_Model.APPOINTMENT">
               <MappingFragment StoreEntitySet="APPOINTMENT">
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="startSlotTime" ColumnName="startSlotTime" />
@@ -249,29 +256,31 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DOCTOR">
-            <EntityTypeMapping TypeName="MedicalAppointmentManagementModel.DOCTOR">
+            <EntityTypeMapping TypeName="Appointement_MVC_Model.DOCTOR">
               <MappingFragment StoreEntitySet="DOCTOR">
                 <ScalarProperty Name="doctorAMKA" ColumnName="doctorAMKA" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="surname" ColumnName="surname" />
-                <ScalarProperty Name="speciality" ColumnName="speciality" />
+                <ScalarProperty Name="specialty" ColumnName="specialty" />
                 <ScalarProperty Name="ADMIN_userid" ColumnName="ADMIN_userid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PATIENT">
-            <EntityTypeMapping TypeName="MedicalAppointmentManagementModel.PATIENT">
+            <EntityTypeMapping TypeName="Appointement_MVC_Model.PATIENT">
               <MappingFragment StoreEntitySet="PATIENT">
                 <ScalarProperty Name="patientAMKA" ColumnName="patientAMKA" />
                 <ScalarProperty Name="userid" ColumnName="userid" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="password" ColumnName="password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="MedicalAppointmentManagementModel.sysdiagrams">
+            <EntityTypeMapping TypeName="Appointement_MVC_Model.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />

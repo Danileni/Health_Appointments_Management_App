@@ -2,7 +2,7 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
+<div class="jumbotron" style="background-color:darksalmon;">
     <h2>Welcome to iHealth</h2>
     <p class="lead">Where Care Comes First</p>
 </div>
@@ -14,18 +14,34 @@
         <p>
             Get the best in health care with the help of our highly qualified doctors. Click the button below to get started.
         </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Find Doctors &raquo;</a></p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","Doctors")">Find Doctors &raquo;</a></p>
     </div>
     <div class="col-md-4">
         <img src="~/Media/appointment.jpg" />
         <h2>Create Appointments</h2>
         <p>Setting up appointments has never been so easy. Its just a registration and few clicks away.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Book Now &raquo;</a></p>
+        <p><a class="btn btn-default" href="@Url.Action("Create","Appointments")">Book Now &raquo;</a></p>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <img src="~/Media/patient.jpg" />
+        <h2>Patient</h2>
+        <p class="lead">Do you have a patient account ?</p>
+        <p><a class="btn btn-default" href="@Url.Action("Login","Patients")">Login &raquo;</a></p>
+        <a href="/Patients/Create" class="fw-light">I haven't registered yet</a>
     </div>
     <div class="col-md-4">
-        <img src="~/Media/statistics.jpg" />
-        <h2>View Statistics</h2>
-        <p>Want to know how well we are doing? Check it out yourself.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Show Statistics &raquo;</a></p>
+        <img src="~/Media/doctors.jpg" />
+        <h2 class="display-6 pb-1">Doctor</h2>
+        <p class="lead">Login to manage your appointments</p>
+        <p><a class="btn btn-default" href="@Url.Action("Login","Doctors")">Login &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <img src="~/Media/admin.jpg" />
+        <h2 class="display-6 pb-1">Admin</h2>
+        <p class="lead">Login to manage Patients and Doctors registrations.</p>
+        <p><a class="btn btn-default" href="@Url.Action("Login","Admins")">Login &raquo;</a></p>
     </div>
 </div>

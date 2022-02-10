@@ -23,8 +23,9 @@ namespace HealthAppointmentsManagement.Models
         public int doctorAMKA { get; set; }
         public string username { get; set; }
         public string name { get; set; }
+        public string password { get; set; }
         public string surname { get; set; }
-        public string speciality { get; set; }
+        public string specialty { get; set; }
         public int ADMIN_userid { get; set; }
     
         public virtual ADMIN ADMIN { get; set; }
