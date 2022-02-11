@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -14,12 +15,98 @@ namespace HealthAppointmentsManagement.Controllers
     {
         private Appointement_MVC_Entities db = new Appointement_MVC_Entities();
 
+        // Login
+        // GET: Doctors/Login
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        // POST: Doctors/Login
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(DOCTOR objUser)
+        {
+
+            using (Appointement_MVC_Entities db = new Appointement_MVC_Entities())
+            {
+                var obj = db.DOCTOR.Where(a => a.username.Equals(objUser.username) && a.password.Equals(objUser.password)).FirstOrDefault();
+                if (obj != null)
+                {
+                    Session["doctorAMKA"] = obj.doctorAMKA.ToString();
+                    Session["UserName"] = obj.username.ToString();
+                    return RedirectToAction("DoctorMenu");
+                }
+            }
+            ViewData["Error"] = "Please check your email and password!";
+            return View(objUser);
+        }
+
         // GET: Doctors
+        public ActionResult DoctorMenu()
+        {
+            if (Session["doctorAMKA"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            return View();
+        }
+
+        //Logout
+        public ActionResult Logout()
+        {
+            Session["doctorAMKA"] = null;
+            Session["UserName"] = null;
+            Session.Abandon();
+            return Redirect("../Home");
+        }
+
+
+        // GET: Index -> login
         public ActionResult Index()
         {
-            var dOCTOR = db.DOCTOR.Include(d => d.ADMIN);
-            return View(dOCTOR.ToList());
+            return RedirectToAction("DoctorMenu");
         }
+
+
+        // GET: Doctors/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Doctors/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "doctorAMKA,username,name,surname,password,speciality,ADMIN_userid")] DOCTOR doctor)
+        {
+            if (ModelState.IsValid)
+            {
+                //int AdminID = (int)Session["admin"];
+
+
+                try
+                {
+                    //doctor.ADMIN_userid = Convert.ToInt32(Session["admin"]);
+                    db.DOCTOR.Add(doctor);
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in entityValidationErrors.ValidationErrors)
+                        {
+                            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                        }
+                    }
+                }
+                return RedirectToAction("Login");
+            }
+
+            return View(doctor);
+        }
+
 
         // GET: Doctors/Details/5
         public ActionResult Details(int? id)
@@ -33,31 +120,6 @@ namespace HealthAppointmentsManagement.Controllers
             {
                 return HttpNotFound();
             }
-            return View(dOCTOR);
-        }
-
-        // GET: Doctors/Create
-        public ActionResult Create()
-        {
-            ViewBag.ADMIN_userid = new SelectList(db.ADMIN, "userid", "username");
-            return View();
-        }
-
-        // POST: Doctors/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "doctorAMKA,username,name,password,surname,specialty,ADMIN_userid")] DOCTOR dOCTOR)
-        {
-            if (ModelState.IsValid)
-            {
-                db.DOCTOR.Add(dOCTOR);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.ADMIN_userid = new SelectList(db.ADMIN, "userid", "username", dOCTOR.ADMIN_userid);
             return View(dOCTOR);
         }
 

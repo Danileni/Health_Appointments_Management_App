@@ -20,7 +20,7 @@
         <img src="~/Media/appointment.jpg" />
         <h2>Create Appointments</h2>
         <p>Setting up appointments has never been so easy. Its just a registration and few clicks away.</p>
-        <p><a class="btn btn-default" href="@Url.Action("Create","Appointments")">Book Now &raquo;</a></p>
+        <p><a class="btn btn-default" href="@Url.Action("Login","Patients")">Book Now &raquo;</a></p>
     </div>
 </div>
 <br />
@@ -28,20 +28,20 @@
     <div class="col-md-4">
         <img src="~/Media/patient.jpg" />
         <h2>Patient</h2>
-        <p class="lead">Do you have a patient account ?</p>
+        <p class="lead"><h5>Do you have a patient account ?</h5></p>
         <p><a class="btn btn-default" href="@Url.Action("Login","Patients")">Login &raquo;</a></p>
         <a href="/Patients/Create" class="fw-light">I haven't registered yet</a>
     </div>
     <div class="col-md-4">
         <img src="~/Media/doctors.jpg" />
         <h2 class="display-6 pb-1">Doctor</h2>
-        <p class="lead">Login to manage your appointments</p>
+        <p class="lead"><h5>Login to manage your appointments</h5></p>
         <p><a class="btn btn-default" href="@Url.Action("Login","Doctors")">Login &raquo;</a></p>
     </div>
     <div class="col-md-4">
         <img src="~/Media/admin.jpg" />
         <h2 class="display-6 pb-1">Admin</h2>
-        <p class="lead">Login to manage Patients and Doctors registrations.</p>
+        <p class="lead"><h5>Login to manage Patients and Doctors registrations.</h5></p>
         <p><a class="btn btn-default" href="@Url.Action("Login","Admins")">Login &raquo;</a></p>
     </div>
 </div>

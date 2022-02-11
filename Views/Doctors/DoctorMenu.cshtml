@@ -1,0 +1,46 @@
+﻿@model HealthAppointmentsManagement.Models.DOCTOR
+
+@{
+    ViewBag.Title = "DoctorMenu";
+}
+
+<div class="row">
+    <div class="col-lg-6 mx-auto">
+        <h1 class="display-5">Doctor Menu</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6 mx-auto">
+        <div class="border border-dark bg-dark rounded p-2">
+            <p class="lead">Welcome @Session["UserName"].ToString()!</p>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="row">
+    <div class="col-lg-6 mx-auto">
+        <div class="border border-dark bg-dark rounded p-2">
+            <h1 class="display-6 pb-1">Appointment</h1>
+            <p class="lead">Create an appointment</p>
+            <p><a class="btn btn-default" href="@Url.Action("Create","Appointments")">Create &raquo;</a></p>
+            <p class="lead pt-2">View appointmens</p>
+            <p><a class="btn btn-default" href="@Url.Action("Appointments")">View &raquo;</a></p>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="row">
+    <div class="col-lg-6 mx-auto">
+        <div class="border border-dark bg-dark rounded p-2">
+            <h1 class="display-6 pb-1">Profile</h1>
+            <p class="lead">View profile</p>
+            @Html.ActionLink("View", "Details", new { id = @Session["doctorAMKA"].ToString() }, new { @class = "btn btn-outline-primary" })
+            <p class="lead pt-2">Edit Profile</p>
+            @Html.ActionLink("Edit", "Edit", new { id = @Session["doctorAMKA"].ToString() }, new { @class = "btn btn-outline-primary" })
+        </div>
+    </div>
+</div>
+<br>

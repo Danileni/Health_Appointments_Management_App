@@ -181,9 +181,11 @@
     <Content Include="Content\Site.css" />
     <Content Include="Media\admin.jpg" />
     <Content Include="Media\appointment.jpg" />
+    <Content Include="Media\doctor.png" />
     <Content Include="Media\doctors.jpg" />
     <Content Include="Media\find_doctors.jpg" />
     <Content Include="Media\patient.jpg" />
+    <Content Include="Media\patient.png" />
     <Content Include="Media\statistics.jpg" />
     <Content Include="Models\MyModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -255,6 +257,7 @@
     <Content Include="Views\Patients\Login.cshtml" />
     <Content Include="Views\Admins\Register.cshtml" />
     <Content Include="Views\Patients\Schedule.cshtml" />
+    <Content Include="Views\Doctors\DoctorMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
